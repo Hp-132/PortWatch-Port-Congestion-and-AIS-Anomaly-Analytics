@@ -1,0 +1,76 @@
+# ---------------------------------------------------------------------------
+# MARITIME-X .gitignore
+# The raw AIS CSV (4.9 GB) and the derived data lake (12 GB) must never be
+# committed: GitHub rejects single files over 100 MB.
+# ---------------------------------------------------------------------------
+
+# raw dataset -- place it locally, see dataset/README.md
+marine_ais_dataset.csv
+dataset/marine_ais_dataset.csv
+*.csv
+# ... but these small reference / sample / metric CSVs ARE tracked
+!config/ports.csv
+!dataset/sample_ais.csv
+!output/reports/*.csv
+!output/pipeline_metrics/*.csv
+
+# data lake (Spark stage outputs, 12 GB)
+output/lake/
+# Spark part-file noise anywhere
+_SUCCESS
+.*.crc
+
+# everything under output/ is ignored except the small committed artefacts
+output/*
+!output/.gitkeep
+!output/logs/
+!output/reports/
+!output/pipeline_metrics/
+# large logs (keep the small pipeline logs, drop anything heavy)
+*.log.*
+output/logs/*.gz
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# node / frontend tooling
+node_modules/
+package-lock.json
+
+# spark / hive local state
+spark-warehouse/
+metastore_db/
+derby.log
+
+# local Hadoop data directories (namenode/datanode dirs live outside the repo,
+# but guard against anyone pointing them inside it)
+cluster/data/
+cluster/logs/
+cluster/tmp/
+hadoop-data/
+dfs/
+yarn-local/
+
+# local-only team sheets and documents (never committed)
+MEMBER2_COMMANDS.md
+MEMBER3_COMMANDS.md
+docs/architecture.md
+docs/*.docx
+
+# secrets & archives
+.env
+*.env
+src.zip
+*.zip
+
+# ide / os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
