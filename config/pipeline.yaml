@@ -1,0 +1,135 @@
+# MARITIME-X pipeline configuration
+# ---------------------------------
+# Every analytical threshold lives here so that results are reproducible and
+# assumptions are visible. Values are project-defined engineering choices,
+# not industry standards, unless stated otherwise.
+
+storage:
+  # Root of the data lake. Local development uses a folder that mirrors the
+  # HDFS layout; on the cluster this becomes hdfs://master:9000/maritime.
+  # Override with the MX_DATA_ROOT environment variable.
+  data_root: "output/lake"
+  # Raw AIS CSV. Locally the original file; on the cluster /maritime/raw/ais.
+  # Override with MX_RAW_INPUT.
+  raw_input: "marine_ais_dataset.csv"
+  # Processed data format during development. CSV only (no Parquet).
+  csv_compression: "none"     # none | gzip
+
+spark:
+  app_name: "MARITIME-X"
+  # Override with MX_SPARK_MASTER (e.g. yarn or spark://master:7077).
+  master: "local[12]"
+  driver_memory: "8g"
+  shuffle_partitions: 96
+  timezone: "UTC"
+  # Used when master is "yarn" or "spark://...". Sized for the 3-node cluster
+  # (2 NodeManagers x 3 GB / 6 vcores) sharing one 16 GB host with MongoDB:
+  # one executor container per worker node (1.5 GB heap + 0.5 GB overhead).
+  cluster:
+    driver_memory: "1g"
+    executor_instances: 2
+    executor_cores: 3
+    executor_memory: "1536m"
+    executor_memory_overhead: "512m"
+    executor_java_home: "C:/Java/jdk-24"
+    yarn_staging_dir: "hdfs://localhost:9820/spark/staging"
+    yarn_jars: "hdfs://localhost:9820/spark/jars/*.jar"
+
+cleaning:
+  # Valid MMSI = 9 digits with a Maritime Identification Digit 2xx-7xx
+  mmsi_min: 200000000
+  mmsi_max: 799999999
+  max_valid_sog_kn: 60.0       # SOG above this is treated as erroneous (set to null)
+  null_island_tolerance_deg: 0.01
+
+trajectory:
+  # Movement threshold used to distinguish stationary vs underway fixes
+  stationary_sog_kn: 0.5
+  underway_sog_kn: 2.0
+
+ports:
+  reference_file: "config/ports.csv"
+  # Only these vessel groups are used for port congestion / turnaround.
+  # Tugs, pilots, pleasure craft and fishing vessels are excluded because
+  # they operate *inside* ports and would distort queue and dwell metrics.
+  commercial_groups: ["Cargo", "Tanker"]
+  # A new visit starts when the vessel changes port or is absent from the
+  # port area for longer than this.
+  visit_break_hours: 12
+  # Visits shorter than this with no stop are treated as pass-through traffic.
+  min_visit_minutes: 30
+  # A run of stationary/moored fixes must last this long to count as a berth
+  # episode (filters vessels slowing in the channel).
+  min_berth_minutes: 30
+  # Visits starting/ending within this margin of the dataset window are
+  # flagged as censored (we cannot observe their true arrival/departure).
+  censor_margin_hours: 2
+
+congestion:
+  # Port Congestion Index (PCI) - PROJECT-DEFINED, NOT AN INDUSTRY STANDARD.
+  # Each component is min-max normalised across ports (after clipping to the
+  # 5th-95th percentile) and combined with these weights.
+  pci_weights:
+    queue: 0.35          # average vessels waiting at anchorage
+    waiting: 0.30        # average waiting time before berth (hours)
+    dwell: 0.15          # average time at berth (hours)
+    utilization: 0.20    # average berth occupancy / observed capacity proxy
+  # Observed berth capacity proxy = this percentile of hourly at-berth counts
+  capacity_percentile: 0.95
+
+dark_vessel:
+  # AIS gap detection. Thresholds differ by transceiver class because Class B
+  # units transmit far less frequently than Class A.
+  gap_minutes_class_a: 60
+  gap_minutes_class_b: 120
+  # Gaps where the vessel is stationary inside a port on both sides are kept
+  # but heavily down-weighted (routine low-rate reporting at berth).
+  density_grid_deg: 0.25
+  night_start_hour: 20       # local solar hour
+  night_end_hour: 5
+  kmeans_k_candidates: [4, 5, 6, 7, 8]
+  kmeans_seed: 42
+  kmeans_sample_fraction: 1.0
+  # Final risk = rule_weight * rule_score + ml_weight * ml_score (0-100)
+  rule_weight: 0.6
+  ml_weight: 0.4
+  risk_levels:               # upper bounds (inclusive)
+    Normal: 30
+    Watch: 60
+    Suspicious: 80
+    High Priority: 100
+
+visibility:
+  # AIS proximity / visibility events around elevated gaps (observation only;
+  # the data has no radio message content).
+  min_risk_score: 61          # Suspicious + High Priority gaps
+  radius_nm: 10.0             # "nearby" = received within this distance of the gap start/end position
+  window_minutes: 30          # ... within this many minutes of the gap start/end time
+  cell_deg: 0.2               # spatial-join grid (5x5 cells searched around each probe)
+  max_neighbours: 12          # neighbours stored per gap for display (counts use all)
+  timeline_pad_minutes: 120   # reporting timeline shown before/after the gap
+
+identity:
+  # "Potential MMSI identity inconsistency" checks (never proof of spoofing)
+  max_dt_minutes: 30          # only compare fixes close in time
+  min_jump_nm: 2.0            # ignore small GNSS jitter
+  implausible_speed_kn:       # implied-speed ceilings by vessel group
+    default: 35
+    "High Speed Craft": 55
+    Passenger: 45
+    Military: 50
+    "Law Enforcement": 50
+    "Search and Rescue": 50
+  sog_mismatch_factor: 3.0    # implied speed > factor * reported SOG (+ 5 kn)
+  min_events_to_flag: 3
+
+serving:
+  # Map-ready position snapshots are bucketed to this many minutes
+  position_bucket_minutes: 60
+  # Vessel track simplification for map display
+  track_bucket_minutes: 15
+
+mongodb:
+  # Override with MX_MONGO_URI / MX_MONGO_DB
+  uri: "mongodb://localhost:27017"
+  database: "maritime_x"
