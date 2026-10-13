@@ -1,0 +1,52 @@
+﻿python : WARNING: Using incubator modules: jdk.incubator.vector
+At C:\Users\Hensi\Downloads\BDS_Assignment\scripts\run_pipeline_cluster.ps1:13 char:1
++ python -u -m src.pipeline @pyArgs 2>&1 | Tee-Object -FilePath output\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Using ...ncubator.vector:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Spark 4.2.0 master=yarn defaultParallelism=2
+
+===== stage identity =====
+26/10/07 09:58:50 WARN YarnScheduler: Initial job has not accepted any resources; check your cluster UI to ensure that 
+workers are registered and have sufficient resources
+[metrics:identity] events=50408, track_conflict_events=20633, isolated_outlier_events=29775, vessels_with_events=1478, vessels_flagged=593, flag_label=Potential MMSI identity inconsistency, elapsed_seconds=311.6
+===== identity done in 316s =====
+
+===== stage serving_views =====
+26/10/07 10:03:43 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This 
+behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+[metrics:serving_views] vessel_summaries=24529, elapsed_seconds=605.4
+===== serving_views done in 610s =====
+
+===== stage ais_visibility =====
+[metrics:ais_visibility] elevated_gaps=2693, by_visibility={'isolated': {'gaps': 220, 'high_priority': 3}, 'coverage_unconfirmed': {'gaps': 49, 'high_priority': 0}, 'coverage_observed': {'gaps': 2424, 'high_priority': 59}}, radius_nm=10.0, window_minutes=30, elapsed_seconds=168.2
+===== ais_visibility done in 179s =====
+
+===== stage load_mongodb =====
+[mongo] ports                            38 documents
+[mongo] congestion_hourly             6,384 documents
+[mongo] congestion_daily                266 documents
+[mongo] port_visits                   2,121 documents
+[mongo] turnaround_stats                112 documents
+[mongo] vessels                      24,529 documents
+[mongo] vessel_positions          2,216,078 documents
+[mongo] vessel_tracks                24,529 documents
+[mongo] anomalies                    48,772 documents
+[mongo] ais_visibility                2,693 documents
+[mongo] identity_events              50,408 documents
+[mongo] identity_vessels              1,478 documents
+[mongo] cluster_profiles                  4 documents
+[mongo] daily_trends                      7 documents
+[mongo] daily_group_activity            112 documents
+[mongo] hourly_activity                 168 documents
+[mongo] pipeline_metrics                 11 documents
+[mongo] loaded into mongodb://localhost:27017/maritime_x in 289.0s
+===== load_mongodb done in 289s =====
+SUCCESS: The process with PID 17584 (child process of PID 6812) has been terminated.
+SUCCESS: The process with PID 6812 (child process of PID 34332) has been terminated.
+SUCCESS: The process with PID 34332 (child process of PID 20676) has been terminated.

@@ -1,0 +1,6 @@
+metric,value
+track_rows,47912404
+reporting_interval_seconds,"{""B"": {""segments"": 13806182, ""p50"": 180, ""p90"": 419, ""p95"": 719, ""p99"": 1440, ""p999"": 8999, ""segments_over_1h"": 35924, ""segments_over_2h"": 19950}, ""A"": {""segments"": 34081693, ""p50"": 71, ""p90"": 182, ""p95"": 280, ""p99"": 720, ""p999"": 2946, ""segments_over_1h"": 28822, ""segments_over_2h"": 17585}}"
+elapsed_seconds,489.5
+recorded_at,"""2026-10-06T10:15:21Z"""
+spark_master,"""local[12]"""

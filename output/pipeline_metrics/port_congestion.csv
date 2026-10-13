@@ -1,0 +1,8 @@
+metric,value
+ports_configured,38
+ports_with_pci,36
+top_pci,"{""USMSY"": 84.3, ""USHOU"": 83.4, ""USPTA"": 70.9, ""USBTR"": 67.1, ""USLAX"": 65.6}"
+pci_weights,"{""queue"": 0.35, ""waiting"": 0.3, ""dwell"": 0.15, ""utilization"": 0.2}"
+elapsed_seconds,50.3
+recorded_at,"""2026-10-06T13:32:43Z"""
+spark_master,"""local[12]"""

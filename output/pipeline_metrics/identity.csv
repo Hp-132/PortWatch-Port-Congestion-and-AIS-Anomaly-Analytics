@@ -1,0 +1,10 @@
+metric,value
+events,50408
+track_conflict_events,20633
+isolated_outlier_events,29775
+vessels_with_events,1478
+vessels_flagged,593
+flag_label,"""Potential MMSI identity inconsistency"""
+elapsed_seconds,168.7
+recorded_at,"""2026-10-06T13:04:02Z"""
+spark_master,"""local[12]"""

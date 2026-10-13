@@ -1,0 +1,30 @@
+port_id,port_name,vessels_in_port_zone,vessels_in_anchorage_zone,moored_in_port_zone,anchored_in_zones
+USHOU,Houston,201,163,195,154
+USLAX,Los Angeles / Long Beach,118,17,94,46
+USMSY,New Orleans (Mississippi River),89,66,51,93
+USNYC,New York / New Jersey,81,3,66,12
+USPEF,Port Everglades,62,21,54,11
+USORF,Norfolk / Hampton Roads,56,4,50,6
+USCRP,Corpus Christi,50,8,50,7
+USOAK,Oakland / San Francisco Bay,49,6,25,31
+USSAV,Savannah,44,0,42,0
+USBAL,Baltimore,42,12,41,14
+USFPO,Freeport,39,20,35,17
+USBTR,Baton Rouge / South Louisiana,39,26,26,27
+USPDX,Portland (Columbia River),37,2,34,8
+USJAX,Jacksonville,37,9,37,7
+USPHL,Philadelphia (Delaware River),33,1,32,3
+USMOB,Mobile,30,1,30,0
+USTIW,Tacoma,28,2,26,5
+USBPT,Beaumont / Port Arthur,28,22,24,24
+PRSJU,San Juan,26,2,24,0
+USSEA,Seattle,26,7,20,3
+USCHS,Charleston,24,1,23,1
+USTPA,Tampa Bay,20,2,19,0
+USMIA,Miami,20,6,15,4
+USILM,Wilmington,18,0,18,0
+USHNL,Honolulu,14,4,12,3
+USBOS,Boston,13,4,11,4
+GUGUM,Apra Harbor,8,0,7,1
+USSAN,San Diego,2,0,2,0
+USANC,Anchorage,0,0,0,0

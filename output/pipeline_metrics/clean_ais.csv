@@ -1,0 +1,18 @@
+metric,value
+raw_rows,47958624
+invalid_timestamp_rows,0
+invalid_mmsi_rows,36765
+invalid_coordinate_rows,0
+sog_nullified,236
+cog_nullified,0
+heading_nullified,0
+clean_rows,47912404
+removed_rows,46220
+vessels,24529
+registry_vessels,24529
+vessels_by_group,"{""Passenger"": 1307, ""Tug"": 1907, ""Tanker"": 971, ""Pleasure Craft"": 8639, ""Search and Rescue"": 552, ""Other"": 657, ""Law Enforcement"": 165, ""Towing"": 2304, ""Fishing"": 1700, ""Unknown"": 355, ""Sailing"": 3247, ""Cargo"": 1920, ""Port Service"": 443, ""High Speed Craft"": 93, ""Dredging"": 179, ""Military"": 90}"
+window_start_epoch,1735689600
+window_end_epoch,1736294399
+elapsed_seconds,766.3
+recorded_at,"""2026-10-06T10:06:22Z"""
+spark_master,"""local[12]"""

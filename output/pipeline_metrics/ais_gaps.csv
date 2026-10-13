@@ -1,0 +1,11 @@
+metric,value
+gaps,48772
+vessels_with_gaps,11328
+stationary_in_port_gaps,10392
+underway_before_gaps,15544
+gap_hours_p50_p90_p99,"[4.1, 27.122, 94.614]"
+gaps_by_transceiver,"{""B"": 19950, ""A"": 28822}"
+threshold_minutes,"{""A"": 60, ""B"": 120}"
+elapsed_seconds,539.1
+recorded_at,"""2026-10-06T10:41:05Z"""
+spark_master,"""local[12]"""

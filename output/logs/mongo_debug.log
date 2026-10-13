@@ -1,0 +1,421 @@
+﻿python : WARNING: Using incubator modules: jdk.incubator.vector
+At line:1 char:426
++ ... ark-shell"; python -u -m src.database.load_mongodb --only congestion_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Using ...ncubator.vector:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/06 18:41:51 ERROR Executor: Exception in task 0.0 in stage 2.0 (TID 2)
+org.apache.spark.SparkException: Python worker exited unexpectedly (crashed)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:711)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:686)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:35)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1068)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1045)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:602)
+	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+	at scala.collection.mutable.Growable.addAll(Growable.scala:61)
+	at scala.collection.mutable.Growable.addAll$(Growable.scala:57)
+	at scala.collection.mutable.ArrayBuilder.addAll(ArrayBuilder.scala:75)
+	at scala.collection.IterableOnceOps.toArray(IterableOnce.scala:1528)
+	at scala.collection.IterableOnceOps.toArray$(IterableOnce.scala:1521)
+	at org.apache.spark.InterruptibleIterator.toArray(InterruptibleIterator.scala:28)
+	at org.apache.spark.rdd.RDD.$anonfun$collect$2(RDD.scala:1073)
+	at org.apache.spark.SparkContext.$anonfun$runJob$5(SparkContext.scala:2536)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)
+	at org.apache.spark.scheduler.Task.run(Task.scala:147)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:81)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:614)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.writeAdditionalInputToPythonWorker(PythonRunner.scal
+a:975)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.read(PythonRunner.scala:879)
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:330)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:388)
+	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:213)
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:390)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1053)
+	... 22 more
+26/10/06 18:41:52 WARN TaskSetManager: Lost task 0.0 in stage 2.0 (TID 2) (10.21.12.80 executor driver): 
+org.apache.spark.SparkException: Python worker exited unexpectedly (crashed)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:711)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:686)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:35)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1068)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1045)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:602)
+	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+	at scala.collection.mutable.Growable.addAll(Growable.scala:61)
+	at scala.collection.mutable.Growable.addAll$(Growable.scala:57)
+	at scala.collection.mutable.ArrayBuilder.addAll(ArrayBuilder.scala:75)
+	at scala.collection.IterableOnceOps.toArray(IterableOnce.scala:1528)
+	at scala.collection.IterableOnceOps.toArray$(IterableOnce.scala:1521)
+	at org.apache.spark.InterruptibleIterator.toArray(InterruptibleIterator.scala:28)
+	at org.apache.spark.rdd.RDD.$anonfun$collect$2(RDD.scala:1073)
+	at org.apache.spark.SparkContext.$anonfun$runJob$5(SparkContext.scala:2536)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)
+	at org.apache.spark.scheduler.Task.run(Task.scala:147)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:81)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:614)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.writeAdditionalInputToPythonWorker(PythonRunner.scal
+a:975)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.read(PythonRunner.scala:879)
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:330)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:388)
+	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:213)
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:390)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1053)
+	... 22 more
+
+26/10/06 18:41:52 ERROR TaskSetManager: Task 0 in stage 2.0 failed 1 times; aborting job
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hensi\Downloads\BDS_Assignment\src\database\load_mongodb.py", line 175, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Hensi\Downloads\BDS_Assignment\src\database\load_mongodb.py", line 171, in main
+    run(only=args.only.split(",") if args.only else None)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hensi\Downloads\BDS_Assignment\src\database\load_mongodb.py", line 161, in run
+    write_collection(builder(), name, indexes, cfg["uri"], cfg["database"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hensi\Downloads\BDS_Assignment\src\database\load_mongodb.py", line 66, in write_collection
+    df.foreachPartition(_write_partition)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\sql\classic\dataframe.py", 
+line 533, in foreachPartition
+    self.rdd.foreachPartition(f)  # type: ignore[arg-type]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\core\rdd.py", line 1667, in 
+foreachPartition
+    self.mapPartitions(func).count()  # Force evaluation
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\core\rdd.py", line 2179, in 
+count
+    return self.mapPartitions(lambda i: [sum(1 for _ in i)]).sum()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\core\rdd.py", line 2154, in 
+sum
+    return self.mapPartitions(lambda x: [sum(x)]).fold(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        0, operator.add
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\core\rdd.py", line 1911, in 
+fold
+    vals = self.mapPartitions(func).collect()
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\core\rdd.py", line 1699, in 
+collect
+    sock_info = self.ctx._jvm.PythonRDD.collectAndServe(self._jrdd.rdd())
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\py4j\java_gateway.py", line 1362, in 
+__call__
+    return_value = get_return_value(
+        answer, self.gateway_client, self.target_id, self.name)
+  File 
+"C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\pyspark\errors\exceptions\captured.py", line 
+251, in deco
+    return f(*a, **kw)
+  File "C:\Users\Hensi\AppData\Local\Programs\Python\Python313\Lib\site-packages\py4j\protocol.py", line 327, in 
+get_return_value
+    raise Py4JJavaError(
+        "An error occurred while calling {0}{1}{2}.\n".
+        format(target_id, ".", name), value)
+py4j.protocol.Py4JJavaError: An error occurred while calling z:org.apache.spark.api.python.PythonRDD.collectAndServe.
+: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 2.0 failed 1 times, most recent 
+failure: Lost task 0.0 in stage 2.0 (TID 2) (10.21.12.80 executor driver): org.apache.spark.SparkException: Python 
+worker exited unexpectedly (crashed)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:711)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:686)
+
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:35)
+
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1068)
+
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1045)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:602)
+
+	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+
+	at scala.collection.mutable.Growable.addAll(Growable.scala:61)
+
+	at scala.collection.mutable.Growable.addAll$(Growable.scala:57)
+
+	at scala.collection.mutable.ArrayBuilder.addAll(ArrayBuilder.scala:75)
+
+	at scala.collection.IterableOnceOps.toArray(IterableOnce.scala:1528)
+
+	at scala.collection.IterableOnceOps.toArray$(IterableOnce.scala:1521)
+
+	at org.apache.spark.InterruptibleIterator.toArray(InterruptibleIterator.scala:28)
+
+	at org.apache.spark.rdd.RDD.$anonfun$collect$2(RDD.scala:1073)
+
+	at org.apache.spark.SparkContext.$anonfun$runJob$5(SparkContext.scala:2536)
+
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)
+
+	at org.apache.spark.scheduler.Task.run(Task.scala:147)
+
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)
+
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)
+
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)
+
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)
+
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)
+
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54)
+
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:81)
+
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:614)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.writeAdditionalInputToPythonWorker(PythonRunner.scal
+a:975)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.read(PythonRunner.scala:879)
+
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289)
+
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:330)
+
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:388)
+
+	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:213)
+
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:390)
+
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1053)
+
+	... 22 more
+
+
+Driver stacktrace:
+
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$3(DAGScheduler.scala:3318)
+
+	at scala.Option.getOrElse(Option.scala:201)
+
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:3318)
+
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:3310)
+
+	at scala.collection.immutable.List.foreach(List.scala:323)
+
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:3310)
+
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1363)
+
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1363)
+
+	at scala.Option.foreach(Option.scala:437)
+
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1363)
+
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:3589)
+
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:3517)
+
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:3506)
+
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:50)
+
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:1063)
+
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2496)
+
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2517)
+
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2536)
+
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2561)
+
+	at org.apache.spark.rdd.RDD.$anonfun$collect$1(RDD.scala:1073)
+
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:169)
+
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:134)
+
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)
+
+	at org.apache.spark.rdd.RDD.withScope(RDD.scala:417)
+
+	at org.apache.spark.rdd.RDD.collect(RDD.scala:1072)
+
+	at org.apache.spark.api.python.PythonRDD$.collectAndServe(PythonRDD.scala:232)
+
+	at org.apache.spark.api.python.PythonRDD.collectAndServe(PythonRDD.scala)
+
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+
+	at py4j.Gateway.invoke(Gateway.java:282)
+
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+
+Caused by: org.apache.spark.SparkException: Python worker exited unexpectedly (crashed)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:711)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator$$anonfun$1.applyOrElse(PythonRunner.scala:686)
+
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:35)
+
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1068)
+
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1045)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:602)
+
+	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+
+	at scala.collection.mutable.Growable.addAll(Growable.scala:61)
+
+	at scala.collection.mutable.Growable.addAll$(Growable.scala:57)
+
+	at scala.collection.mutable.ArrayBuilder.addAll(ArrayBuilder.scala:75)
+
+	at scala.collection.IterableOnceOps.toArray(IterableOnce.scala:1528)
+
+	at scala.collection.IterableOnceOps.toArray$(IterableOnce.scala:1521)
+
+	at org.apache.spark.InterruptibleIterator.toArray(InterruptibleIterator.scala:28)
+
+	at org.apache.spark.rdd.RDD.$anonfun$collect$2(RDD.scala:1073)
+
+	at org.apache.spark.SparkContext.$anonfun$runJob$5(SparkContext.scala:2536)
+
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:206)
+
+	at org.apache.spark.scheduler.Task.run(Task.scala:147)
+
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:894)
+
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:86)
+
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:83)
+
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:97)
+
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:897)
+
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+
+	... 1 more
+
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54)
+
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:81)
+
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:614)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.writeAdditionalInputToPythonWorker(PythonRunner.scal
+a:975)
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderInputStream.read(PythonRunner.scala:879)
+
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:289)
+
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:330)
+
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:388)
+
+	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:213)
+
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:390)
+
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:1053)
+
+	... 22 more
+
+
+SUCCESS: The process with PID 13368 (child process of PID 30168) has been terminated.
+SUCCESS: The process with PID 30168 (child process of PID 3160) has been terminated.
+SUCCESS: The process with PID 3160 (child process of PID 20776) has been terminated.

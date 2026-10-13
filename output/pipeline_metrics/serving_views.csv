@@ -1,0 +1,5 @@
+metric,value
+vessel_summaries,24529
+elapsed_seconds,324.2
+recorded_at,"""2026-10-06T13:38:37Z"""
+spark_master,"""local[12]"""

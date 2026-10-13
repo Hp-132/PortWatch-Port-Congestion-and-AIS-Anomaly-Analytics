@@ -1,0 +1,8 @@
+metric,value
+training_rows,48772
+selected_k,4
+silhouette_by_k,"{""4"": 0.3231, ""5"": 0.2972, ""6"": 0.3125, ""7"": 0.3186, ""8"": 0.3168}"
+cluster_sizes,"{""3"": 7623, ""0"": 2705, ""2"": 19066, ""1"": 19378}"
+elapsed_seconds,194.3
+recorded_at,"""2026-10-06T10:44:55Z"""
+spark_master,"""local[12]"""

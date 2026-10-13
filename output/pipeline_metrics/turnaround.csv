@@ -1,0 +1,10 @@
+metric,value
+visits,2121
+berthed_visits,1693
+complete_visits,766
+avg_waiting_h,2.33
+avg_dwell_h,30.05
+avg_turnaround_h,36.49
+elapsed_seconds,12.0
+recorded_at,"""2026-10-06T13:33:04Z"""
+spark_master,"""local[12]"""

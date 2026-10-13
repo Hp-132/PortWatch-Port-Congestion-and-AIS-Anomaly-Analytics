@@ -1,0 +1,119 @@
+﻿python : WARNING: Using incubator modules: jdk.incubator.vector
+At C:\Users\Hensi\Downloads\BDS_Assignment\scripts\run_pipeline_local.ps1:11 char:1
++ python -u -m src.pipeline @pyArgs 2>&1 | Tee-Object -FilePath output\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Using ...ncubator.vector:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Spark 4.2.0 master=local[12] defaultParallelism=12
+
+===== stage port_visits =====
+26/10/06 18:59:55 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This 
+behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+[metrics:port_visits] port_zone_points=2094457, points_by_state={'BERTH': 1318119, 'MOVING': 272802, 'ANCHOR': 503536}, visits_by_type={'PASS_THROUGH': {'visits': 3138, 'complete': 2983}, 'BERTHED': {'visits': 1693, 'complete': 766}, 'ANCHORED_ONLY': {'visits': 428, 'complete': 179}}, elapsed_seconds=238.5
+===== port_visits done in 254s =====
+
+===== stage port_congestion =====
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:29 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:37 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+26/10/06 19:02:37 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, 
+this can cause serious performance degradation.
+[metrics:port_congestion] ports_configured=38, ports_with_pci=36, top_pci={'USMSY': 84.3, 'USHOU': 83.4, 'USPTA': 70.9, 'USBTR': 67.1, 'USLAX': 65.6}, pci_weights={'queue': 0.35, 'waiting': 0.3, 'dwell': 0.15, 'utilization': 0.2}, elapsed_seconds=50.3
+===== port_congestion done in 59s =====
+
+===== stage turnaround =====
+[metrics:turnaround] visits=2121, berthed_visits=1693, complete_visits=766, avg_waiting_h=2.33, avg_dwell_h=30.05, avg_turnaround_h=36.49, elapsed_seconds=12.0
+===== turnaround done in 21s =====
+
+===== stage serving_views =====
+[metrics:serving_views] vessel_summaries=24529, elapsed_seconds=324.2
+===== serving_views done in 334s =====
+
+===== stage load_mongodb =====
+[mongo] ports                            38 documents
+[mongo] congestion_hourly             6,384 documents
+[mongo] congestion_daily                266 documents
+[mongo] port_visits                   2,121 documents
+[mongo] turnaround_stats                112 documents
+[mongo] vessels                      24,529 documents
+[mongo] vessel_positions          2,216,078 documents
+[mongo] vessel_tracks                24,529 documents
+[mongo] anomalies                    48,772 documents
+[mongo] identity_events              50,408 documents
+[mongo] identity_vessels              1,478 documents
+[mongo] cluster_profiles                  4 documents
+[mongo] daily_trends                      7 documents
+[mongo] daily_group_activity            112 documents
+[mongo] hourly_activity                 168 documents
+[mongo] pipeline_metrics                 10 documents
+[mongo] loaded into mongodb://localhost:27017/maritime_x in 152.1s
+===== load_mongodb done in 152s =====
+SUCCESS: The process with PID 12376 (child process of PID 24980) has been terminated.
+SUCCESS: The process with PID 24980 (child process of PID 15832) has been terminated.
+SUCCESS: The process with PID 15832 (child process of PID 12032) has been terminated.

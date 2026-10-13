@@ -1,0 +1,9 @@
+metric,value
+gaps_by_risk_level,"{""Normal"": 20515, ""Watch"": 25568, ""Suspicious"": 2625, ""High Priority"": 64}"
+rule_ml_correlation,0.777
+density_p95,257.0
+rule_weight,0.6
+ml_weight,0.4
+elapsed_seconds,58.6
+recorded_at,"""2026-10-06T10:46:26Z"""
+spark_master,"""local[12]"""

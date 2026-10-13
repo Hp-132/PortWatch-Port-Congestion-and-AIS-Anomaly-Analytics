@@ -1,0 +1,9 @@
+WARNING: Using incubator modules: jdk.incubator.vector
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+[metrics:trajectories] track_rows=47912404, reporting_interval_seconds={'B': {'segments': 13806182, 'p50': 180, 'p90': 419, 'p95': 719, 'p99': 1440, 'p999': 8999, 'segments_over_1h': 35924, 'segments_over_2h': 19950}, 'A': {'segments': 34081693, 'p50': 71, 'p90': 182, 'p95': 280, 'p99': 720, 'p999': 2946, 'segments_over_1h': 28822, 'segments_over_2h': 17585}}, elapsed_seconds=489.5
+SUCCESS: The process with PID 4212 (child process of PID 23572) has been terminated.
+SUCCESS: The process with PID 23572 (child process of PID 2944) has been terminated.
+SUCCESS: The process with PID 2944 (child process of PID 19040) has been terminated.

@@ -1,0 +1,33 @@
+﻿python : WARNING: Using incubator modules: jdk.incubator.vector
+At line:1 char:342
++ ... | Out-Null; python -u scripts\cluster_smoke.py *> output\logs\smoke_y ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Using ...ncubator.vector:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: package sun.security.action not in java.base
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+master=yarn app_id=application_1791307432504_0001 ui=http://10.21.12.80:4040
+26/10/06 22:59:59 WARN YarnScheduler: Initial job has not accepted any resources; check your cluster UI to ensure that 
+workers are registered and have sufficient resources
+26/10/06 23:00:14 WARN YarnScheduler: Initial job has not accepted any resources; check your cluster UI to ensure that 
+workers are registered and have sufficient resources
+input=hdfs://localhost:9820/maritime/raw/ais/marine_ais_dataset.csv partitions=37
+rows=47,958,624 distinct_mmsi=24,688
+  2025-01-01  7,337,208
+  2025-01-02  6,684,195
+  2025-01-03  6,585,461
+  2025-01-04  6,844,921
+  2025-01-05  7,608,241
+  2025-01-06  6,453,187
+  2025-01-07  6,445,411
+python workers used: 12 processes
+  executor driver host=10.21.12.80:61953                  cores=0 tasks_completed=0 input=0.00 GB
+  executor      2 host=kubernetes.docker.internal:59162   cores=3 tasks_completed=79 input=9.07 GB
+  executor      1 host=kubernetes.docker.internal:59130   cores=3 tasks_completed=93 input=10.54 GB
+elapsed 363s
+SUCCESS: The process with PID 28136 (child process of PID 13168) has been terminated.
+SUCCESS: The process with PID 13168 (child process of PID 24688) has been terminated.
+SUCCESS: The process with PID 24688 (child process of PID 34352) has been terminated.

@@ -1,0 +1,7 @@
+metric,value
+port_zone_points,2094457
+points_by_state,"{""BERTH"": 1318119, ""MOVING"": 272802, ""ANCHOR"": 503536}"
+visits_by_type,"{""PASS_THROUGH"": {""visits"": 3138, ""complete"": 2983}, ""BERTHED"": {""visits"": 1693, ""complete"": 766}, ""ANCHORED_ONLY"": {""visits"": 428, ""complete"": 179}}"
+elapsed_seconds,238.5
+recorded_at,"""2026-10-06T13:31:44Z"""
+spark_master,"""local[12]"""
