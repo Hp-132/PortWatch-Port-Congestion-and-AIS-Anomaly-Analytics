@@ -1,0 +1,39 @@
+port_id,port_name,region,port_lat,port_lon,port_radius_nm,anch_lat,anch_lon,anch_radius_nm
+USLAX,Los Angeles / Long Beach,California,33.745,-118.235,5.0,33.705,-118.165,7.0
+USOAK,Oakland / San Francisco Bay,California,37.800,-122.310,5.0,37.745,-122.335,4.0
+USBEN,Benicia / Martinez (Carquinez),California,38.040,-122.140,4.0,38.040,-122.140,4.0
+USSAN,San Diego,California,32.700,-117.170,3.0,32.680,-117.200,4.0
+USSEA,Seattle,Washington,47.585,-122.350,4.0,47.610,-122.375,4.0
+USTIW,Tacoma,Washington,47.270,-122.410,4.0,47.295,-122.450,4.0
+CAVAN,Vancouver,British Columbia,49.290,-123.080,5.0,49.300,-123.220,5.0
+USPDX,Portland (Columbia River),Oregon,45.600,-122.750,6.0,45.600,-122.750,10.0
+USNYC,New York / New Jersey,New York,40.670,-74.100,6.0,40.580,-74.040,5.0
+USBOS,Boston,Massachusetts,42.350,-71.030,3.0,42.350,-70.950,4.0
+USPHL,Philadelphia (Delaware River),Pennsylvania,39.900,-75.150,7.0,39.150,-75.300,7.0
+USBAL,Baltimore,Maryland,39.250,-76.550,5.0,38.970,-76.420,5.0
+USORF,Norfolk / Hampton Roads,Virginia,36.900,-76.330,6.0,36.970,-76.100,6.0
+USILM,Wilmington,North Carolina,34.200,-77.950,3.0,34.200,-77.950,8.0
+USCHS,Charleston,South Carolina,32.820,-79.930,5.0,32.680,-79.680,6.0
+USSAV,Savannah,Georgia,32.100,-81.130,5.0,31.950,-80.750,8.0
+USBQK,Brunswick,Georgia,31.130,-81.500,3.0,31.050,-81.300,5.0
+USJAX,Jacksonville,Florida,30.400,-81.550,5.0,30.400,-81.250,6.0
+USPBI,Palm Beach,Florida,26.770,-80.055,2.5,26.770,-80.000,4.0
+USPEF,Port Everglades,Florida,26.090,-80.120,2.5,26.110,-80.070,4.0
+USMIA,Miami,Florida,25.770,-80.170,2.5,25.760,-80.080,4.0
+USTPA,Tampa Bay,Florida,27.920,-82.440,5.0,27.620,-82.700,6.0
+USMOB,Mobile,Alabama,30.700,-88.040,4.0,30.200,-88.100,6.0
+USMSY,New Orleans (Mississippi River),Louisiana,29.930,-90.060,8.0,29.930,-90.060,15.0
+USBTR,Baton Rouge / South Louisiana,Louisiana,30.300,-90.950,15.0,30.300,-90.950,20.0
+USFOU,Port Fourchon (offshore supply base),Louisiana,29.115,-90.205,3.0,29.115,-90.205,6.0
+USHOU,Houston,Texas,29.730,-95.150,12.0,29.250,-94.600,12.0
+USGLS,Galveston,Texas,29.310,-94.800,2.5,29.310,-94.800,2.5
+USTXT,Texas City,Texas,29.370,-94.890,2.5,29.370,-94.890,2.5
+USFPO,Freeport,Texas,28.940,-95.310,4.0,28.850,-95.200,6.0
+USCRP,Corpus Christi,Texas,27.820,-97.300,12.0,27.700,-97.000,8.0
+USBPT,Beaumont,Texas,30.070,-94.080,6.5,29.500,-93.700,8.0
+USPTA,Port Arthur / Sabine Pass,Texas,29.800,-93.930,6.0,29.500,-93.700,8.0
+USHNL,Honolulu,Hawaii,21.310,-157.870,2.5,21.280,-157.900,5.0
+USANC,Anchorage,Alaska,61.240,-149.890,3.0,61.240,-149.890,8.0
+PRSJU,San Juan,Puerto Rico,18.445,-66.100,2.5,18.480,-66.120,5.0
+VISTT,St Thomas (Charlotte Amalie),US Virgin Islands,18.330,-64.930,2.5,18.330,-64.930,4.0
+GUGUM,Apra Harbor,Guam,13.445,144.660,3.0,13.445,144.660,6.0
