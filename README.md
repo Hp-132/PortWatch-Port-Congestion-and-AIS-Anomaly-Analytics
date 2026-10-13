@@ -1,4 +1,4 @@
-# ⚓ MARITIME-X — PortWatch
+# ⚓ PortWatch
 ### Big Data Analytics for Maritime Traffic, Port Congestion & AIS Anomaly Detection
 
 **Turning 47.9 million vessel-position reports into actionable maritime insights.**
