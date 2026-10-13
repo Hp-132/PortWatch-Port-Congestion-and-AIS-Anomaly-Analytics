@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MARITIME-X · Port Intelligence</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23003153'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%237fd1c7' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%237fd1c7'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <link href="/static/css/app.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" class="brand-mark" aria-hidden="true">
+      <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".55"/>
+      <circle cx="16" cy="16" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8"/>
+      <path d="M16 2v28M2 16h28" stroke="currentColor" stroke-width="1" opacity=".35"/>
+      <path d="M16 16 L26 8" stroke="#7FD1C9" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="16" cy="16" r="2" fill="#7FD1C9"/>
+    </svg>
+    <div>
+      <div class="brand-name">MARITIME-X</div>
+      <div class="brand-sub">Port Intelligence</div>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-view="overview" role="tab">Overview</button>
+    <button class="tab" data-view="ports" role="tab">Port Congestion</button>
+    <button class="tab" data-view="vessels" role="tab">Vessel Performance</button>
+    <button class="tab" data-view="anomalies" role="tab">AIS Anomalies</button>
+    <button class="tab" data-view="trends" role="tab">Historical Trends</button>
+  </nav>
+  <div class="topbar-right">
+    <div class="search">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5 18 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input id="vessel-search" type="search" placeholder="Search vessel name or MMSI" autocomplete="off">
+      <div id="search-results" class="search-results" hidden></div>
+    </div>
+    <div class="window-chip" id="window-chip" title="Analysed AIS window (UTC)">—</div>
+  </div>
+</header>
+
+<main>
+  <!-- ======================= OVERVIEW ======================= -->
+  <section class="view active" id="view-overview">
+    <p class="scope" id="ins-ov-scope" hidden></p>
+    <div class="kpi-row" id="ov-kpis"></div>
+    <div class="grid ov-grid">
+      <div class="panel map-panel">
+        <div class="panel-head">
+          <h2>Operational picture</h2>
+          <div class="head-tools">
+            <label class="mini">Port <select id="ov-port"><option value="">All ports</option></select></label>
+            <span class="muted small" id="ov-map-caption"></span>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <div id="ov-map" class="map"></div>
+          <div class="map-overlay layers glass" id="ov-layers"></div>
+          <div class="map-overlay timebar glass">
+            <button class="icon-btn" id="ov-play" title="Replay the week hour by hour" aria-label="Play">
+              <svg viewBox="0 0 16 16"><path d="M4 3l9 5-9 5z" fill="currentColor"/></svg>
+            </button>
+            <input type="range" id="ov-time" min="0" max="167" step="1" value="12" aria-label="Map time">
+            <span class="mono" id="ov-time-label">—</span>
+            <select id="ov-window" aria-label="Position window">
+              <option value="1">last 1 h</option><option value="3" selected>last 3 h</option>
+              <option value="6">last 6 h</option><option value="12">last 12 h</option>
+            </select>
+          </div>
+          <div class="map-overlay legend glass" id="ov-legend"></div>
+          <aside class="map-overlay vessel-card glass" id="ov-vessel" hidden></aside>
+        </div>
+        <p class="insight" id="ins-ov-map" hidden></p>
+        <div class="grid three inner">
+          <div>
+            <div class="panel-head"><h2>Vessel activity</h2><span class="muted small">vessels reporting per hour</span></div>
+            <div id="ov-activity" class="chart" style="height:150px"></div>
+            <p class="insight" id="ins-ov-activity" hidden></p>
+          </div>
+          <div>
+            <div class="panel-head"><h2>AIS gap review priority</h2></div>
+            <div id="ov-risk" class="chart" style="height:150px"></div>
+            <p class="insight" id="ins-ov-risk" hidden></p>
+          </div>
+          <div>
+            <div class="panel-head"><h2>Fleet composition</h2><span class="muted small">vessels observed</span></div>
+            <div id="ov-fleet" class="chart" style="height:150px"></div>
+            <p class="insight" id="ins-ov-fleet" hidden></p>
+          </div>
+        </div>
+      </div>
+      <div class="side-col">
+        <div class="panel">
+          <div class="panel-head"><h2>Port Congestion Index</h2><span class="tag" title="Project-defined composite index - not an industry standard">project-defined</span></div>
+          <div id="ov-pci" class="chart" style="height:600px"></div>
+          <p class="insight" id="ins-ov-pci" hidden></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PORT CONGESTION ======================= -->
+  <section class="view" id="view-ports">
+    <div class="toolbar">
+      <label>Port <select id="pc-port"></select></label>
+      <span class="muted small">Commercial traffic only (Cargo, Tanker). PCI = project-defined composite of anchorage queue, waiting, berth time and utilisation, normalised across ports (0–100).</span>
+    </div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>Port map</h2><span class="muted small">size = arrivals · colour = congestion band · click a port</span></div>
+        <div class="map-wrap"><div id="pc-allmap" class="map" style="height:380px"></div>
+          <div class="map-overlay legend glass" id="pc-legend"></div></div>
+        <p class="insight" id="ins-pc-ranking" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Congestion ranking</h2><span class="muted small">PCI by port, stacked by component</span></div>
+        <div id="pc-rankchart" class="chart" style="height:380px"></div>
+        <p class="insight" id="ins-pc-comparison" hidden></p>
+      </div>
+    </div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>Waiting vs berth time</h2><span class="muted small">average hours per berthed visit</span></div>
+        <div id="pc-waitberth" class="chart" style="height:330px"></div>
+        <p class="insight" id="ins-pc-waitberth" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Turnaround by port</h2><span class="muted small">median and 90th percentile, complete berthed visits</span></div>
+        <div id="pc-turnaround" class="chart" style="height:330px"></div>
+        <p class="insight" id="ins-pc-turnaround" hidden></p>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-head"><h2>Port ranking table</h2><span class="muted small">click a row for the port analysis below</span></div>
+      <div class="table-wrap" style="max-height:330px"><table class="data" id="pc-table"></table></div>
+    </div>
+
+    <h3 class="section-title" id="pc-detail-title">Port analysis</h3>
+    <p class="insight lead" id="ins-pc-summary" hidden></p>
+    <div class="kpi-row compact" id="pc-kpis"></div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>PCI composition</h2><span class="muted small" id="pc-pci-label"></span></div>
+        <div id="pc-components" class="chart" style="height:230px"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Port zones and vessels</h2><span class="muted small">berth area, anchorage and commercial vessels mid-week</span></div>
+        <div class="map-wrap"><div id="pc-map" class="map" style="height:230px"></div></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-head"><h2>Hourly occupancy</h2><span class="muted small">commercial vessels at berth and waiting at anchorage</span></div>
+      <div id="pc-hourly" class="chart" style="height:250px"></div>
+      <p class="insight" id="ins-pc-hourly" hidden></p>
+    </div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>Daily arrivals & departures</h2></div>
+        <div id="pc-daily" class="chart" style="height:220px"></div>
+        <p class="insight" id="ins-pc-daily" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Turnaround by vessel group</h2><span class="muted small">complete visits, hours</span></div>
+        <div id="pc-groups" class="chart" style="height:220px"></div>
+        <p class="insight" id="ins-pc-groups" hidden></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= VESSEL PERFORMANCE ======================= -->
+  <section class="view" id="view-vessels">
+    <div class="toolbar">
+      <label>Vessel
+        <span class="inline-search"><input id="vp-search" type="search" placeholder="Name or MMSI" autocomplete="off">
+          <span id="vp-search-results" class="search-results light" hidden></span></span>
+      </label>
+      <label>Quick pick <select id="vp-pick"><option value="">Busiest commercial vessels…</option></select></label>
+      <span class="muted small" id="vp-selected-label">Select a vessel to see its movement history.</span>
+    </div>
+    <div class="grid vp-top">
+      <div class="panel">
+        <div class="panel-head"><h2 id="vp-v-title">Vessel details</h2><span id="vp-v-pills"></span></div>
+        <div id="vp-v-detail"><p class="muted">No vessel selected.</p></div>
+      </div>
+      <div class="panel map-panel">
+        <div class="panel-head"><h2>Trajectory</h2><span class="muted small" id="vp-map-caption">15-min track · colour = speed over ground · dashed = AIS gap</span></div>
+        <div class="map-wrap"><div id="vp-map" class="map" style="height:430px"></div>
+          <div class="map-overlay legend glass" id="vp-legend"></div></div>
+        <p class="insight" id="ins-vp-vessel" hidden></p>
+      </div>
+    </div>
+    <div class="grid vp-mid">
+      <div class="panel">
+        <div class="panel-head"><h2>Speed profile</h2><span class="muted small">reported SOG (knots), shaded = AIS gaps, bands = port visits</span></div>
+        <div id="vp-speed" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-vp-speed" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Port visits of this vessel</h2><span class="muted small">arrival → waiting → berth → departure</span></div>
+        <div id="vp-v-visits" style="max-height:460px;overflow:auto"><p class="muted">—</p></div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Fleet performance (cargo &amp; tanker)</h3>
+    <div class="toolbar">
+      <label>Port <select id="vp-port"><option value="">All ports</option></select></label>
+      <label>Vessel group <select id="vp-group"><option value="">Cargo + Tanker</option><option value="Cargo">Cargo</option><option value="Tanker">Tanker</option></select></label>
+      <label>Visit type <select id="vp-type"><option value="BERTHED">Berthed</option><option value="ANCHORED_ONLY">Anchored only</option><option value="">All</option></select></label>
+      <label class="check"><input type="checkbox" id="vp-complete" checked> complete visits only</label>
+    </div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>Waiting, berth time and turnaround by port</h2><span class="muted small">median hours, complete berthed visits</span></div>
+        <div id="vp-ports" class="chart" style="height:320px"></div>
+        <p class="insight" id="ins-vp-byport" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Waiting vs berth time per visit</h2><span class="muted small">each dot is one visit · click to open the vessel</span></div>
+        <div id="vp-scatter" class="chart" style="height:320px"></div>
+        <p class="insight" id="ins-vp-scatter" hidden></p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Port visits</h2><span class="muted small" id="vp-count"></span></div>
+      <div class="table-wrap" style="max-height:420px"><table class="data" id="vp-table"></table></div>
+    </div>
+  </section>
+
+  <!-- ======================= AIS ANOMALIES ======================= -->
+  <section class="view" id="view-anomalies">
+    <div class="banner">
+      <strong>AIS dark-vessel anomaly detection.</strong>
+      Scores rank AIS reporting gaps for review. Gaps are commonly caused by receiver coverage, equipment settings or Class B reporting rates;
+      a high score marks a <em>potential AIS anomaly</em> / <em>high-priority event for investigation</em>, never proof of illegal activity or intentional AIS disabling.
+      No ground-truth labels exist for this one-week dataset.
+    </div>
+    <div class="kpi-row compact" id="an-kpis"></div>
+    <div class="toolbar">
+      <div class="chips" id="an-levels"></div>
+      <label>Vessel <input type="search" id="an-vessel" placeholder="name or MMSI" style="width:140px"></label>
+      <label>Port proximity <select id="an-prox"><option value="">Any</option><option value="near">≤ 10 nm from port</option><option value="coastal">10–50 nm</option><option value="offshore">&gt; 50 nm</option></select></label>
+      <label>Gap ≥ <input type="number" id="an-mingap" min="0" step="1" value="0" style="width:58px"> h</label>
+      <label>Vessel type <select id="an-group"><option value="">All</option></select></label>
+      <label>Day <select id="an-day"><option value="">Whole week</option></select></label>
+      <label>Min score <input type="number" id="an-min" min="0" max="100" value="0" style="width:58px"></label>
+    </div>
+    <div class="grid an-grid">
+      <div class="panel map-panel">
+        <div class="panel-head"><h2>Anomaly map</h2><span class="muted small">● last known position · dashed line to recovered position (path unobserved)</span></div>
+        <div class="map-wrap"><div id="an-map" class="map" style="height:520px"></div>
+          <div class="map-overlay legend glass" id="an-legend"></div></div>
+        <p class="insight" id="ins-an-proximity" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Highest-priority AIS gaps</h2><span class="muted small" id="an-count"></span></div>
+        <div class="table-wrap" style="max-height:540px"><table class="data" id="an-table"></table></div>
+      </div>
+    </div>
+    <div class="grid an-detail">
+      <div class="panel" id="an-detail-panel">
+        <div class="panel-head"><h2>Gap detail &amp; contributing factors</h2><span id="an-detail-pill"></span></div>
+        <div id="an-detail"><p class="muted">Select a gap in the table or on the map.</p></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>AIS proximity / visibility event</h2><span class="tag" title="Derived only from AIS position reports; no radio message content exists in the data">observation, not communication</span></div>
+        <div id="an-vis"><p class="muted">Select a Suspicious or High Priority gap to see which vessels were received nearby before, during and after it.</p></div>
+        <p class="insight" id="ins-an-visibility" hidden></p>
+      </div>
+    </div>
+    <div class="grid three">
+      <div class="panel">
+        <div class="panel-head"><h2>Risk score distribution</h2></div>
+        <div id="an-hist" class="chart" style="height:220px"></div>
+        <p class="insight" id="ins-an-distribution" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Top contributing factors</h2><span class="muted small">avg score points, High Priority gaps</span></div>
+        <div id="an-factors" class="chart" style="height:220px"></div>
+        <p class="insight" id="ins-an-factors" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Gaps per day by priority</h2></div>
+        <div id="an-days" class="chart" style="height:220px"></div>
+        <p class="insight" id="ins-an-byday" hidden></p>
+      </div>
+    </div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>Top anomalous vessels</h2><span class="muted small">ranked by highest gap score · click to filter</span></div>
+        <div class="table-wrap" style="max-height:330px"><table class="data" id="an-vessels"></table></div>
+        <p class="insight" id="ins-an-vessels" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>MLlib KMeans gap clusters</h2><span class="muted small" id="an-ml-caption"></span></div>
+        <div class="table-wrap"><table class="data" id="an-clusters"></table></div>
+        <p class="insight" id="ins-an-clusters" hidden></p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Potential MMSI identity inconsistency</h2><span class="muted small">position jumps implying impossible speed</span></div>
+      <p class="note">Flagged when an MMSI repeatedly reports positions that cannot belong to one vessel track. Causes include GNSS faults, corrupted messages or two transponders sharing an MMSI. This does not prove identity swapping.</p>
+      <div class="table-wrap" style="max-height:300px"><table class="data" id="an-identity"></table></div>
+      <p class="insight" id="ins-an-identity" hidden></p>
+    </div>
+  </section>
+
+  <!-- ======================= HISTORICAL TRENDS ======================= -->
+  <section class="view" id="view-trends">
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>AIS messages per hour</h2><span class="muted small">cleaned records, UTC</span></div>
+        <div id="tr-hourly" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-messages" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Active vessels per hour</h2><span class="muted small">distinct MMSI, UTC</span></div>
+        <div id="tr-vessels" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-vessels" hidden></p>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-head"><h2>Daily Port Congestion Index</h2><span class="muted small">project-defined index, port × day · blank = too few visits that day</span></div>
+      <div id="tr-heat" class="chart" style="height:600px"></div>
+      <p class="insight" id="ins-tr-heatmap" hidden></p>
+    </div>
+    <div class="grid three">
+      <div class="panel">
+        <div class="panel-head"><h2>Port arrivals per day</h2><span class="muted small">commercial, all monitored ports</span></div>
+        <div id="tr-arrivals" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-arrivals" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Waiting trend</h2><span class="muted small">avg hours before berth, by arrival day</span></div>
+        <div id="tr-waiting" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-waiting" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Turnaround trend</h2><span class="muted small">complete visits, by arrival day</span></div>
+        <div id="tr-turnaround" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-turnaround" hidden></p>
+      </div>
+    </div>
+    <div class="grid two">
+      <div class="panel">
+        <div class="panel-head"><h2>AIS gaps per day</h2><span class="muted small">by review priority</span></div>
+        <div id="tr-gaps" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-gaps" hidden></p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Active vessels per day by group</h2></div>
+        <div id="tr-groups" class="chart" style="height:230px"></div>
+        <p class="insight" id="ins-tr-groups" hidden></p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Daily summary</h2></div>
+      <div class="table-wrap"><table class="data" id="tr-table"></table></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>MARITIME-X · HDFS → YARN/Spark → MongoDB → FastAPI → MapLibre · basemap © OpenStreetMap contributors © CARTO</span>
+  <span id="footer-pipeline" class="muted"></span>
+</footer>
+<div class="tooltip-layer" id="toast" hidden></div>
+<script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
